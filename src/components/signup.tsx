@@ -4,7 +4,7 @@ import React from 'react'
 const Signup = () => {
   return (
     <View>
-      <Text>Signup</Text>
+      <Text>Signup has been changed from Fahad</Text>
     </View>
   )
 }
