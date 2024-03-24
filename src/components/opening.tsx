@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 
 const Opening = (props: any) => {
@@ -6,7 +6,7 @@ const Opening = (props: any) => {
     <ScrollView contentContainerStyle={styles.scrollViewContainer}>
       <Image source={require("../../assets/project-management-icon-flat-design-GP43TY.jpg")} style={styles.logo} />
       <Text style={styles.text}>Task Genius</Text>
-      <TouchableOpacity style={styles.buttonContainer} onPress={() => props.navigation.navigate('Signup')}>
+      <TouchableOpacity style={styles.buttonContainer} onPress={() => props.navigation.navigate('Login')}>
         <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.buttonContainerSignup} onPress={() => props.navigation.navigate('Signup')}>
