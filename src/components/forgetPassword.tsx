@@ -1,13 +1,12 @@
 import { StyleSheet, Text, ScrollView, Image, TouchableOpacity, View, TextInput, Pressable } from 'react-native'
 import React, { useState } from 'react'
 
-const Login = (props: any) => {
+const ForgetPassword = (props: any) => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContainer}>
       <Image source={require("../../assets/project-management-icon-flat-design-GP43TY.jpg")} style={styles.logo} />
-      <Text style={styles.text}>Welcome Back </Text>
+      <Text style={styles.text}>Restore Password </Text>
 
       <View style={styles.inputContainer}>
         <TextInput
@@ -16,31 +15,22 @@ const Login = (props: any) => {
           value={email}
           onChangeText={(text) => setEmail(text)}
         />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-        />
+        <Text style={styles.forgotPasswordText}>You will receive email with password reset code </Text>
+        
       </View>
       
-      <Pressable onPress={() => props.navigation.navigate("ForgetPassword")} style={styles.forgotPasswordButton}>
-        <Text style={styles.forgotPasswordText}>Forget your password?</Text>
-      </Pressable>
+      
 
-      <TouchableOpacity style={styles.buttonContainer} onPress={() => props.navigation.navigate('Signup')}>
-        <Text style={styles.buttonText}>Log In</Text>
+      <TouchableOpacity style={styles.buttonContainer} onPress={() => props.navigation.navigate('ForgetPasswordCode')}>
+        <Text style={styles.buttonText}>Send  Instructions</Text>
       </TouchableOpacity>
 
-      <Pressable onPress={() => props.navigation.navigate("Signup")} style={styles.signupButton}>
-        <Text style={styles.signupText}>Don't have an account? <Text style={styles.signupLink}>Signup</Text></Text>
-      </Pressable>
+      
     </ScrollView>
   )
 }
 
-export default Login
+export default ForgetPassword
 
 const styles = StyleSheet.create({
   scrollViewContainer: {
@@ -54,7 +44,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   text: {
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: "bold",
     paddingBottom: 10,
     color: "#38759E",
@@ -65,25 +55,25 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 12,
-    height: 50,
+    height: 60,
     width: 200,
     backgroundColor: "#6529C9",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 8,
+    borderRadius: 15,
     marginBottom: 10,
   },
   inputContainer: {
     marginTop: 20,
-    width: 300,
+    width: 350,
   },
   input: {
-    height: 40,
+    height: 60,
     borderColor: "gray",
     borderWidth: 1,
     marginBottom: 10,
     paddingHorizontal: 10,
-    borderRadius: 8,
+    borderRadius: 15,
   },
   forgotPasswordText: {
     color: "#38759E",
