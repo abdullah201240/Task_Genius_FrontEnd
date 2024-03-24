@@ -1,7 +1,32 @@
 import { StyleSheet, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import * as Font from 'expo-font';
 
+async function loadFonts() {
+  try {
+    await Font.loadAsync({
+      'ChrustyRock-ORLA': require('../../assets/fonts/ChrustyRock-ORLA.ttf'),
+    });
+  } catch (error) {
+    console.error('Error loading fonts:', error);
+  }
+}
 const Opening = (props: any) => {
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  useEffect(() => {
+    async function loadFontsAsync() {
+      await loadFonts();
+      setFontsLoaded(true);
+    }
+
+    loadFontsAsync();
+  }, []);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+  
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContainer}>
       <Image source={require("../../assets/project-management-icon-flat-design-GP43TY.jpg")} style={styles.logo} />
@@ -34,6 +59,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingBottom: 10,
     color: "#38759E",
+    fontFamily: 'ChrustyRock-ORLA',
+
   },
   buttonText: {
     color: "white",

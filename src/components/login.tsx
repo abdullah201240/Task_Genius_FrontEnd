@@ -1,9 +1,53 @@
-import { StyleSheet, Text, ScrollView, Image, TouchableOpacity, View, TextInput, Pressable } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { ScrollView, Image, View, TextInput, Pressable, TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
+import axios, { AxiosError } from 'axios'; 
+import { API_BASE_URL } from './config';
 
 const Login = (props: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/Login`, {
+        email: email,
+        password: password,
+      });
+
+      if (response.status === 200) {
+        const { email, name, phone } = response.data.data;
+
+        if (email) {
+          props.navigation.navigate('Home', {
+            user: {
+              email: email as string,
+              name: name as string,
+              phone: phone as string,
+            },
+          });
+          console.log('Login successful');
+        } else {
+          Alert.alert('Login Failed', 'Invalid email or password');
+        }
+      } else {
+        Alert.alert('Login Failed', 'Invalid email or password');
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const axiosError: AxiosError = error;
+        if (axiosError.response?.status === 401) {
+          Alert.alert('Login Failed', 'Invalid email or password');
+        } else {
+          console.error('Error during login:', error);
+          Alert.alert('Login Failed', 'An error occurred during login');
+        }
+      } else {
+        console.error('Error during login:', error);
+        Alert.alert('Login Failed', 'An error occurred during login');
+      }
+    }
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContainer}>
       <Image source={require("../../assets/project-management-icon-flat-design-GP43TY.jpg")} style={styles.logo} />
@@ -24,12 +68,12 @@ const Login = (props: any) => {
           onChangeText={(text) => setPassword(text)}
         />
       </View>
-      
+
       <Pressable onPress={() => props.navigation.navigate("ForgetPassword")} style={styles.forgotPasswordButton}>
         <Text style={styles.forgotPasswordText}>Forget your password?</Text>
       </Pressable>
 
-      <TouchableOpacity style={styles.buttonContainer} onPress={() => props.navigation.navigate('Home')}>
+      <TouchableOpacity style={styles.buttonContainer} onPress={handleLogin}>
         <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
 
@@ -37,10 +81,10 @@ const Login = (props: any) => {
         <Text style={styles.signupText}>Don't have an account? <Text style={styles.signupLink}>Signup</Text></Text>
       </Pressable>
     </ScrollView>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
 
 const styles = StyleSheet.create({
   scrollViewContainer: {
@@ -88,8 +132,7 @@ const styles = StyleSheet.create({
   forgotPasswordText: {
     color: "#38759E",
     paddingBottom: 10,
-    paddingRight:40
-
+    paddingRight: 40
   },
   forgotPasswordButton: {
     alignSelf: 'flex-end'
@@ -104,4 +147,4 @@ const styles = StyleSheet.create({
   signupButton: {
     marginTop: 10
   }
-})
+});
