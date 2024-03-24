@@ -29,7 +29,7 @@ const Login = (props: any) => {
         <Text style={styles.forgotPasswordText}>Forget your password?</Text>
       </Pressable>
 
-      <TouchableOpacity style={styles.buttonContainer} onPress={() => props.navigation.navigate('Signup')}>
+      <TouchableOpacity style={styles.buttonContainer} onPress={() => props.navigation.navigate('Home')}>
         <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
 

@@ -8,6 +8,9 @@ import Login from './src/components/login';
 import ForgetPassword from './src/components/forgetPassword';
 import ForgetPasswordCode from './src/components/forgetPasswordCode';
 import ForgetPasswordFinal from './src/components/forgetPasswordFinal';
+import Home from './src/components/home';
+
+
 
 const Stack = createStackNavigator();
 
@@ -21,8 +24,10 @@ export default function App() {
         <Stack.Screen name="ForgetPassword" component={ForgetPassword} options={{ headerShown: false }} />
         <Stack.Screen name="ForgetPasswordCode" component={ForgetPasswordCode} options={{ headerShown: false }} />
         <Stack.Screen name="ForgetPasswordFinal" component={ForgetPasswordFinal} options={{ headerShown: false }} />
+        <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
 
       </Stack.Navigator>
+
       <StatusBar style="auto" />
     </NavigationContainer>
   );
